@@ -1,10 +1,16 @@
 const message = (sequelize, DataTypes) => {
-    const Message = sequelize.define('message', {
-      text: DataTypes.STRING,
-    });
-    Message.associate = models => {
-      Message.belongsTo(models.User);
-    };
-    return Message;
+  const Message = sequelize.define('message', {
+    text: {
+      type: DataTypes.STRING,
+      validate: { notEmpty: true },
+    },
+  });
+
+  Message.associate = models => {
+    Message.belongsTo(models.User);
   };
-  export default message;
+
+  return Message;
+};
+
+export default message;
